@@ -1,4 +1,4 @@
-package com.devthrive.course;
+package com.devthrive.course.entities;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
