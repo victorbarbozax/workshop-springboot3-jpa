@@ -13,8 +13,8 @@ import com.devthrive.course.entities.Order;
 import com.devthrive.course.services.OrderService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/orders")
+public class OrderResource {
 
 	@Autowired
 	private OrderService service;
