@@ -1,22 +1,20 @@
 package com.devthrive.course.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import com.devthrive.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id;
-
+	private OrderItemPK id = new OrderItemPK(); 
+	
 	private Integer quantity;
 	private Double price;
 
@@ -24,13 +22,13 @@ public class OrderItem implements Serializable {
 	}
 
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
-		super();
-		id.setOrder(order);
-		id.setProduct(product);
+		this.id.setOrder(order);
+		this.id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
 
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -39,7 +37,7 @@ public class OrderItem implements Serializable {
 		id.setOrder(order);
 	}
 
-	public Product getPRoduct() {
+	public Product getProduct() {
 		return id.getProduct();
 	}
 
@@ -63,21 +61,20 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public Double getSubTotal() {
+		return price * quantity;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OrderItem other = (OrderItem) obj;
-		return Objects.equals(id, other.id);
-	}
+    public int hashCode() {
+        return id.hashCode();
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        OrderItem other = (OrderItem) obj;
+        return id.equals(other.id);
+    }
 }
