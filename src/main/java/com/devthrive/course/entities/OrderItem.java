@@ -13,8 +13,8 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id = new OrderItemPK(); 
-	
+	private OrderItemPK id = new OrderItemPK();
+
 	private Integer quantity;
 	private Double price;
 
@@ -66,15 +66,17 @@ public class OrderItem implements Serializable {
 	}
 
 	@Override
-    public int hashCode() {
-        return id.hashCode();
-    }
+	public int hashCode() {
+		return id.hashCode();
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        OrderItem other = (OrderItem) obj;
-        return id.equals(other.id);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null || getClass() != obj.getClass())
+			return false;
+		OrderItem other = (OrderItem) obj;
+		return id.equals(other.id);
+	}
 }
